@@ -3,705 +3,987 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kristoffer Brunner Lie - CV</title>
+    <title>Kristoffer Brunner Lie</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: #6366f1; color: white; }
+
+        :root {
+            --bg: #050507;
+            --surface: #0d0d12;
+            --surface2: #141419;
+            --border: #1e1e28;
+            --text: #f0f0f5;
+            --text-secondary: #7a7a8c;
+            --purple: #8b5cf6;
+            --blue: #3b82f6;
+            --cyan: #06b6d4;
+            --green: #10b981;
+            --amber: #f59e0b;
+            --rose: #f43f5e;
+            --pink: #ec4899;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.7;
-            color: #2a2a2a;
-            background: #f8f7f5;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ── Hero ── */
+        .hero {
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #fefefe;
+        .hero-bg {
+            position: absolute;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, rgba(6,182,212,0.06) 0%, transparent 50%);
+            animation: aurora 25s ease-in-out infinite alternate;
         }
 
-        /* Header */
-        .header {
-            padding: 60px 80px;
-            background: #3d5a45;
-            color: white;
+        @keyframes aurora {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(-3%, 2%) rotate(2deg) scale(1.02); }
+            100% { transform: translate(2%, -1%) rotate(-1deg) scale(0.98); }
+        }
+
+        /* Mesh gradient blobs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            mix-blend-mode: screen;
+        }
+
+        .orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--purple), transparent 70%);
+            top: -10%; left: -5%;
+            animation: drift1 18s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--cyan), transparent 70%);
+            top: 40%; right: -10%;
+            animation: drift2 22s ease-in-out infinite;
+        }
+
+        .orb-3 {
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, var(--blue), transparent 70%);
+            bottom: -15%; left: 30%;
+            animation: drift3 20s ease-in-out infinite;
+        }
+
+        .orb-4 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, var(--pink), transparent 70%);
+            top: 20%; left: 50%;
+            animation: drift4 24s ease-in-out infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes drift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(80px, 60px) scale(1.15); }
+            66% { transform: translate(-40px, 30px) scale(0.9); }
+        }
+
+        @keyframes drift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-70px, -50px) scale(1.1); }
+            66% { transform: translate(50px, 40px) scale(0.95); }
+        }
+
+        @keyframes drift3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -40px) scale(0.9); }
+            66% { transform: translate(-50px, -20px) scale(1.12); }
+        }
+
+        @keyframes drift4 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-90px, 30px) scale(1.2); }
+            66% { transform: translate(40px, -60px) scale(0.85); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px 24px;
+            max-width: 1100px;
+            width: 100%;
             display: flex;
             align-items: center;
             gap: 60px;
         }
 
-        .profile-photo {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            filter: grayscale(20%);
-            transition: all 0.4s ease;
+        .hero-text {
+            flex: 1 1 400px;
+            min-width: 280px;
         }
 
-        .profile-photo:hover {
-            filter: grayscale(0%);
+        .hero-photo-wrap {
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .hero-photo {
+            width: 380px;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            object-position: top;
+            border: none;
+            border-radius: 0;
+            transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+            filter: grayscale(10%) brightness(1.05);
+            position: relative;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+
+        .hero-photo-ring { display: none; }
+
+        .hero-photo-glow {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(ellipse at center, rgba(139,92,246,0.2) 0%, rgba(59,130,246,0.1) 40%, transparent 70%);
+            filter: blur(40px);
+            opacity: 0.7;
+            transition: opacity 0.5s;
+            z-index: 0;
+        }
+
+        .hero-photo-wrap:hover .hero-photo-glow { opacity: 1; }
+        .hero-photo-wrap:hover .hero-photo {
+            filter: grayscale(0%) brightness(1.1);
             transform: scale(1.02);
         }
 
-        .header-content {
-            flex: 1;
-        }
-
-        h1 {
-            font-size: 2.8em;
-            margin-bottom: 8px;
-            font-weight: 300;
-            letter-spacing: -1px;
-            color: white;
-        }
-
-        .tagline {
-            font-size: 1.1em;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 24px;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            font-size: 0.95em;
-            color: rgba(255,255,255,0.85);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item:hover {
-            color: white;
-        }
-
-        .contact-label {
-            font-weight: 500;
-            color: white;
-            min-width: 70px;
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-link {
-            display: inline-block;
-            padding: 10px 24px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .social-link:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            background: #fefefe;
-            border-bottom: 1px solid #e5e3df;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            overflow-x: auto;
-        }
-
-        .tab-button {
-            padding: 24px 32px;
-            background: none;
-            border: none;
-            font-size: 0.95em;
-            font-weight: 400;
-            color: #5a5a5a;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-            letter-spacing: 0.5px;
-        }
-
-        .tab-button:hover {
-            color: #3d5a45;
-            background: #fafafa;
-        }
-
-        .tab-button.active {
-            color: #3d5a45;
-            border-bottom-color: #3d5a45;
-            font-weight: 500;
-        }
-
-        /* Content */
-        .content {
-            padding: 60px 80px;
-            max-width: 900px;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Section Titles */
-        .section-title {
-            font-size: 1.8em;
-            font-weight: 300;
-            margin-bottom: 40px;
-            letter-spacing: -0.5px;
-            color: #3d5a45;
-            padding-bottom: 16px;
-            border-bottom: 1px solid #e5e3df;
-        }
-
-        /* Profile Text */
-        .profile-text {
-            font-size: 1.15em;
-            line-height: 1.8;
-            color: #3a3a3a;
-            padding: 0;
-            font-weight: 300;
-        }
-
-        /* Items */
-        .item {
-            margin-bottom: 40px;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-        .item:hover {
-            transform: translateX(4px);
-        }
-
-        .item-header {
-            margin-bottom: 12px;
-        }
-
-        .item-title {
-            font-size: 1.3em;
-            font-weight: 400;
-            color: #2a2a2a;
-            margin-bottom: 4px;
-        }
-
-        .item-company {
-            font-size: 1em;
-            color: #3d5a45;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .item-meta {
-            display: flex;
-            gap: 20px;
+        .hero h1 {
+            font-size: clamp(44px, 7vw, 72px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
             margin-bottom: 16px;
-            font-size: 0.9em;
-            color: #5a5a5a;
+            background: linear-gradient(135deg, #f0f0f5 0%, var(--purple) 50%, var(--cyan) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 6s ease-in-out infinite alternate;
         }
 
-        .item-date {
-            color: #5a5a5a;
-            background: #e8ebe6;
-            padding: 4px 12px;
-            border-radius: 4px;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
-        .item-location {
-            color: #5a5a5a;
+        .hero-tagline {
+            font-size: clamp(17px, 2.5vw, 22px);
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 40px;
+            line-height: 1.5;
         }
 
-        .item-description {
-            color: #3a3a3a;
-            line-height: 1.7;
-            font-size: 0.98em;
+        .hero-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .item-description ul {
-            margin-left: 20px;
-            margin-top: 12px;
-            list-style: none;
+        .btn {
+            padding: 14px 32px;
+            border-radius: 980px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
         }
 
-        .item-description li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: white;
+            box-shadow: 0 4px 20px rgba(139,92,246,0.3);
         }
 
-        .item-description li::before {
-            content: '—';
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 30px rgba(139,92,246,0.4);
+        }
+
+        .btn-ghost {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: #1e1e28;
+            transform: translateY(-2px);
+        }
+
+        .scroll-hint {
             position: absolute;
-            left: 0;
-            color: #3d5a45;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
         }
 
-        .additional-experience {
-            padding: 20px 0;
-            border-top: 1px solid #e5e3df;
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--purple), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ── Sections ── */
+        .section {
+            padding: 120px 24px;
+            max-width: 960px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.9s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 50px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.08;
+            margin-bottom: 56px;
+        }
+
+        .divider {
+            height: 1px;
+            max-width: 960px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        /* ── Cards ── */
+        .timeline { display: flex; flex-direction: column; gap: 12px; }
+
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 36px 40px;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #2a2a38;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.1);
+        }
+
+        .card:hover::after { transform: scaleX(1); }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .card-role { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+        .card-company { font-size: 15px; color: var(--purple); font-weight: 600; margin-bottom: 2px; }
+        .card-location { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; }
+        .card-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+
+        .card-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            padding: 5px 14px;
+            background: var(--surface2);
+            border-radius: 980px;
+            border: 1px solid var(--border);
+        }
+
+        .extra-exp {
+            font-size: 14px;
+            color: var(--text-secondary);
             margin-top: 20px;
-            font-size: 0.95em;
-            color: #5a5a5a;
+            padding: 20px 28px;
+            background: var(--surface);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            line-height: 1.7;
         }
 
-        .additional-experience strong {
-            color: #2a2a2a;
+        .extra-exp strong { color: var(--text); font-weight: 600; }
+
+        /* ── Education ── */
+        .edu-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 44px;
+            border: 1px solid var(--border);
+        }
+
+        .edu-degree { font-size: 26px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; }
+        .edu-school { font-size: 16px; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
+        .edu-date { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+        .edu-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+
+        .edu-tag {
+            padding: 6px 16px;
+            background: var(--surface2);
+            border-radius: 980px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .edu-tag:hover { border-color: var(--purple); color: var(--text); }
+
+        /* ── Grades table ── */
+        .grades-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .grades-title { font-size: 18px; font-weight: 700; }
+
+        .grades-avg {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15));
+            border-radius: 980px;
+            border: 1px solid rgba(139,92,246,0.2);
+        }
+
+        .grades-avg-label { font-size: 13px; color: var(--text-secondary); }
+        .grades-avg-value { font-size: 16px; font-weight: 700; color: var(--green); }
+
+        .grades-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
+
+        .grades-table tr {
+            transition: all 0.3s;
+        }
+
+        .grades-table tr:hover td {
+            background: var(--surface2);
+        }
+
+        .grades-table td {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            background: transparent;
+            transition: background 0.3s;
+        }
+
+        .grades-table td:first-child {
+            border-radius: 10px 0 0 10px;
             font-weight: 500;
+            color: var(--text);
         }
 
-        /* Skills Grid */
+        .grades-table td:last-child {
+            border-radius: 0 10px 10px 0;
+            text-align: right;
+        }
+
+        .grade-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .grade-A {
+            background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,182,212,0.2));
+            color: var(--green);
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+
+        .grade-B {
+            background: rgba(59,130,246,0.15);
+            color: var(--blue);
+            border: 1px solid rgba(59,130,246,0.25);
+        }
+
+        .grade-C {
+            background: rgba(245,158,11,0.15);
+            color: var(--amber);
+            border: 1px solid rgba(245,158,11,0.25);
+        }
+
+        .semester-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 20px 16px 8px;
+        }
+
+        /* ── Skills ── */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
         }
 
         .skill-card {
-            padding: 0;
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .skill-card h3 {
-            font-size: 1.2em;
-            margin-bottom: 12px;
-            font-weight: 500;
-            color: #3d5a45;
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
-        .skill-card p {
-            line-height: 1.7;
-            color: #3a3a3a;
-            font-size: 0.98em;
+        .skill-card:hover {
+            border-color: #2a2a38;
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        /* Certifications */
-        .cert-grid {
+        .skill-card:hover::before { opacity: 0.06; }
+
+        .skill-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+            filter: saturate(1.2);
+        }
+
+        .skill-name { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .skill-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+        /* ── Stats row ── */
+        .stat-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
         }
 
-        .cert-card {
-            padding: 24px 0;
-            border-bottom: 1px solid #e5e3df;
-            transition: all 0.3s ease;
+        .stat-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
         }
 
-        .cert-card:hover {
-            transform: translateX(4px);
+        .stat-card:hover {
+            border-color: #2a2a38;
+            transform: translateY(-3px);
         }
 
-        .cert-title {
-            font-size: 1.1em;
-            font-weight: 500;
-            color: #3d5a45;
-            margin-bottom: 6px;
-        }
+        .stat-value { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
 
-        .cert-details {
-            color: #5a5a5a;
-            font-size: 0.9em;
-        }
-
-        /* Languages */
-        .languages-grid {
+        /* ── Interests ── */
+        .interests-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .language-card {
-            padding: 0;
-        }
-
-        .language-name {
-            font-size: 1.4em;
-            font-weight: 400;
-            margin-bottom: 8px;
-            color: #2a2a2a;
-        }
-
-        .language-level {
-            font-size: 1em;
-            color: #5a5a5a;
-        }
-
-        /* Interests */
-        .interests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
         }
 
         .interest-card {
-            padding: 0;
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
 
-        .interest-title {
-            font-size: 1.2em;
+        .interest-card:hover {
+            border-color: #2a2a38;
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .interest-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+        .interest-name { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .interest-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+        /* ── Contact ── */
+        .contact-section {
+            padding: 100px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(139,92,246,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-title {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .contact-sub {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 36px;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
             font-weight: 500;
-            color: #3d5a45;
-            margin-bottom: 12px;
+            padding: 10px 20px;
+            border-radius: 980px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
         }
 
-        .interest-description {
-            color: #3a3a3a;
-            line-height: 1.7;
-            font-size: 0.98em;
+        .contact-link:hover {
+            color: var(--text);
+            border-color: var(--purple);
+            background: var(--surface2);
         }
 
-        /* Responsive */
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                padding: 40px 30px;
-                text-align: center;
-            }
-
-            .profile-photo {
-                width: 140px;
-                height: 140px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                text-align: left;
-            }
-
-            .tabs {
-                flex-wrap: wrap;
-            }
-
-            .tab-button {
-                flex: 1 1 45%;
-                padding: 18px 16px;
-            }
-
-            .content {
-                padding: 40px 30px;
-            }
-
-            .skills-grid,
-            .interests-grid,
-            .languages-grid,
-            .cert-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero { min-height: auto; padding: 100px 0 60px; }
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 40px; }
+            .hero-text { min-width: 0; }
+            .hero-links { justify-content: center; }
+            .hero-photo { width: 260px; max-height: 340px; }
+            .hero-photo-glow { inset: -20px; }
+            .section { padding: 80px 20px; }
+            .card { padding: 28px 24px; }
+            .edu-card { padding: 28px 24px; }
+            .card-meta { flex-direction: column; }
+            .btn { width: 100%; max-width: 280px; justify-content: center; }
+            .grades-table td { padding: 10px 8px; font-size: 12px; }
+            .orb { opacity: 0.2; }
         }
 
         @media print {
-            body {
-                background: white;
-            }
-
-            .tabs {
-                display: none;
-            }
-
-            .tab-content {
-                display: block !important;
-                page-break-after: always;
-            }
-
-            .item:hover,
-            .cert-card:hover {
-                transform: none;
-            }
+            .hero-bg, .orb, .scroll-hint, .hero-photo-ring { display: none; }
+            .section { opacity: 1; transform: none; padding: 30px 0; }
+            body { background: white; color: #111; }
+            .card, .skill-card, .edu-card, .stat-card, .interest-card { background: #f5f5f5; border-color: #ddd; }
+            .card:hover, .skill-card:hover { transform: none; box-shadow: none; }
         }
 
-        ::selection {
-            background: #3d5a45;
-            color: white;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            .section { opacity: 1; transform: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="profile-photo.jpeg" alt="Kristoffer Brunner Lie" class="profile-photo">
-            <div class="header-content">
-                <h1>Kristoffer Brunner Lie</h1>
-                <div class="tagline">Andreårsstudent ved BI Trondheim. Trainee Vitalaernæring, B2B Operations & Administration.</div>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <span class="contact-label">Lokasjon</span>
-                        <span>Trondheim, Norge</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">Telefon</span>
-                        <span>+47 907 13 933</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">E-post</span>
-                        <span>kristoffer.brunner.lie@gmail.com</span>
-                    </div>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Kristoffer<br>Brunner Lie</h1>
+                <p class="hero-tagline">Business Administration @ BI Trondheim<br>Trainee — Vital Ernæring</p>
+                <div class="hero-links">
+                    <a href="mailto:kristoffer.brunner.lie@gmail.com" class="btn btn-primary">Kontakt meg</a>
+                    <a href="https://www.linkedin.com/in/kristoffer-brunner-lie-5a5676301/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
                 </div>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/kristoffer-brunner-lie-5a5676301/" target="_blank" class="social-link">LinkedIn</a>
-                </div>
+            </div>
+            <div class="hero-photo-wrap">
+                <div class="hero-photo-glow"></div>
+                <img src="profile-cutout.png" alt="Kristoffer Brunner Lie" class="hero-photo">
             </div>
         </div>
 
-        <nav class="tabs">
-            <button class="tab-button active" onclick="showTab('profile')">Profil</button>
-            <button class="tab-button" onclick="showTab('experience')">Erfaring</button>
-            <button class="tab-button" onclick="showTab('education')">Utdanning</button>
-            <button class="tab-button" onclick="showTab('skills')">Kompetanse</button>
-            <button class="tab-button" onclick="showTab('certifications')">Sertifiseringer</button>
-            <button class="tab-button" onclick="showTab('interests')">Interesser</button>
-            <button class="tab-button" onclick="showTab('languages')">Språk</button>
-        </nav>
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+            scroll
+        </div>
+    </section>
 
-        <main class="content">
-            <section id="profile" class="tab-content active">
-                <p class="profile-text">
-                    Studerer Business Administration ved BI Trondheim og jobber deltid med ordrehåndtering og fakturering hos Vital Ernæring. Har erfaring fra både kundeservice, fysisk arbeid og ett år i Forsvaret. Liker strukturerte arbeidsoppgaver, men også å forstå helheten. Ser frem til å bygge erfaring i en rolle der jeg får bruke både Excel-kompetanse og evnen til å løse praktiske problemer.
-                </p>
-            </section>
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Om meg</p>
+        <h2 class="section-title">Strukturert. Nysgjerrig.<br>Handlingsorientert.</h2>
+        <p style="font-size: 17px; color: var(--text-secondary); line-height: 1.85; max-width: 640px;">
+            Andreårsstudent ved BI Trondheim med erfaring fra Forsvaret, kundeservice og B2B-operasjoner. Jobber deltid hos Vital Ernæring med ordrehåndtering, fakturering og webutvikling. Bygget selskapets nettside fra bunnen i React.
+        </p>
+    </section>
 
-            <section id="experience" class="tab-content">
-                <h2 class="section-title">Arbeidserfaring</h2>
-                
-                <article class="item">
-                    <div class="item-header">
-                        <div class="item-title">Trainee – B2B Operations & Administration</div>
-                        <div class="item-company">Vital Ernæring</div>
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Erfaring</p>
+        <h2 class="section-title">Det jeg har gjort.</h2>
+        <div class="timeline">
+            <article class="card">
+                <div class="card-meta">
+                    <div>
+                        <div class="card-role">Trainee — B2B Operations</div>
+                        <div class="card-company">Vital Ernæring</div>
                     </div>
-                    <div class="item-meta">
-                        <span class="item-date">August 2024 – Nåværende</span>
-                        <span class="item-location">Trondheim</span>
-                    </div>
-                    <div class="item-description">
-                        Håndterer ordrebehandling i 24SevenOffice, følger opp kundespørsmål på e-post, og bistår med faktureringsrutiner. Jobber også med lagerkoordinering og sikrer at ordreflyt og varemottak går som det skal.
-                    </div>
-                </article>
-
-                <article class="item">
-                    <div class="item-header">
-                        <div class="item-title">Ledende Menig – Mekanisert Infanteri</div>
-                        <div class="item-company">Forsvaret, 2. Bataljon (Skjold)</div>
-                    </div>
-                    <div class="item-meta">
-                        <span class="item-date">Januar 2023 – Januar 2024</span>
-                        <span class="item-location">Troms</span>
-                    </div>
-                    <div class="item-description">
-                        Tjenestegjorde som infanterisoldat i CV90-enhet med fokus på lagarbeid og rutineoppfølging. Ble utnevnt til Ledende Menig og fikk ansvar for standarden på tropp-nivå. Startet som geværmann, fikk senere rollen som rekylfrikanon-skytter. Ble rangert som en av de faglig sterkeste i troppen.
-                    </div>
-                </article>
-
-                <article class="item">
-                    <div class="item-header">
-                        <div class="item-title">Sesongarbeider – Løypekjøring</div>
-                        <div class="item-company">Kvitfjell Alpinsenter</div>
-                    </div>
-                    <div class="item-meta">
-                        <span class="item-date">Januar 2024 – Vår 2024</span>
-                        <span class="item-location">Kvitfjell</span>
-                    </div>
-                    <div class="item-description">
-                        Støttet tidligmorgen-operasjoner med løypepreparering og daglige sikkerhetsrutiner.
-                    </div>
-                </article>
-
-                <article class="item">
-                    <div class="item-header">
-                        <div class="item-title">Resepsjonist</div>
-                        <div class="item-company">Barry's Bootcamp</div>
-                    </div>
-                    <div class="item-meta">
-                        <span class="item-date">2021 – Juli 2023</span>
-                        <span class="item-location">Oslo</span>
-                    </div>
-                    <div class="item-description">
-                        Håndterte innsjekkinger, bookinger og betalinger i et høytemposmiljø med mye kundekontakt.
-                    </div>
-                </article>
-
-                <div class="additional-experience">
-                    <strong>Øvrig erfaring:</strong> Barnehagelærer (2024) • Flyttemedarbeider, Norges Flyttebyrå (2022–2023) • Renovasjonsarbeider (Sommer 2025)
+                    <span class="card-date">2024 — nå</span>
                 </div>
-            </section>
+                <div class="card-location">Trondheim</div>
+                <p class="card-desc">Ordrebehandling, fakturering, kundeoppfølging og lagerkoordinering. Bygget og vedlikeholder bedriftens nettside (React 19, Vite, Vercel) med SEO, WCAG-tilgjengelighet og CI/CD.</p>
+            </article>
 
-            <section id="education" class="tab-content">
-                <h2 class="section-title">Utdanning</h2>
-                
-                <article class="item">
-                    <div class="item-header">
-                        <div class="item-title">Bachelor i Business Administration</div>
-                        <div class="item-company">BI Handelshøyskolen, Trondheim</div>
+            <article class="card">
+                <div class="card-meta">
+                    <div>
+                        <div class="card-role">Ledende Menig — Mek. Infanteri</div>
+                        <div class="card-company">Forsvaret, 2. Bataljon</div>
                     </div>
-                    <div class="item-meta">
-                        <span class="item-date">August 2024 – Juni 2027 (forventet)</span>
-                    </div>
-                    <div class="item-description">
-                        <strong>Relevante emner:</strong>
-                        <ul>
-                            <li>Økonomi</li>
-                            <li>Strategi og teknologisk endring</li>
-                            <li>Performance management</li>
-                            <li>Markedsføring</li>
-                            <li>Excel-automatisering</li>
-                        </ul>
-                    </div>
-                </article>
-            </section>
-
-            <section id="skills" class="tab-content">
-                <h2 class="section-title">Kompetanse</h2>
-                
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>Excel og databehandling</h3>
-                        <p>Har jobbet mye med Excel gjennom studier og jobb – kan sette opp regneark, bruke formler og automatisere enkle rutiner. Holder på med et kurs i Excel-automatisering og bruker det aktivt til rapportering hos Vital Ernæring.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Systemer og digitale verktøy</h3>
-                        <p>Bruker 24SevenOffice til ordrebehandling og fakturering. Vant til å håndtere mye e-post og sette meg raskt inn i nye systemer. Har lært det meste av det jeg kan gjennom praktisk bruk.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Arbeidsmetodikk</h3>
-                        <p>Strukturert i måten jeg jobber på, holder oversikt selv når det er mye å gjøre. Erfaring fra Forsvaret har gjort meg vant til å følge rutiner, prioritere og levere innen frister.</p>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Samarbeid og ansvar</h3>
-                        <p>Har erfaring fra både teamarbeid og mer selvstendige roller. Liker å ta ansvar for egne oppgaver, men også å bidra der det trengs. Jobber godt både i team og alene.</p>
-                    </div>
+                    <span class="card-date">2023 — 2024</span>
                 </div>
-            </section>
+                <div class="card-location">Skjold, Troms</div>
+                <p class="card-desc">CV90-infanterist og rekylfrikanon-skytter. Utnevnt til Ledende Menig for nysgjerrighet, lærevilje og evne til å ta ansvar utover det som ble forventet.</p>
+            </article>
 
-            <section id="certifications" class="tab-content">
-                <h2 class="section-title">Sertifiseringer og kvalifikasjoner</h2>
-                
-                <div class="cert-grid">
-                    <div class="cert-card">
-                        <div class="cert-title">Førerkort klasse B</div>
-                        <div class="cert-details">Personbil</div>
+            <article class="card">
+                <div class="card-meta">
+                    <div>
+                        <div class="card-role">Løypekjøring</div>
+                        <div class="card-company">Kvitfjell Alpinsenter</div>
                     </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">First Responder</div>
-                        <div class="cert-details">Forsvaret, januar 2023</div>
-                    </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">Forsvarets vernedyktighetsmedalje</div>
-                        <div class="cert-details">Hæren, 2023</div>
-                    </div>
-                    
-                    <div class="cert-card">
-                        <div class="cert-title">Forsvarets rekruttutdanning</div>
-                        <div class="cert-details">Januar – februar 2023</div>
-                    </div>
+                    <span class="card-date">Vinter 2024</span>
                 </div>
-            </section>
+                <div class="card-location">Kvitfjell</div>
+                <p class="card-desc">Løypepreparering og sikkerhetsrutiner.</p>
+            </article>
 
-            <section id="interests" class="tab-content">
-                <h2 class="section-title">Interesser</h2>
-                
-                <div class="interests-grid">
-                    <div class="interest-card">
-                        <div class="interest-title">Triathlon</div>
-                        <div class="interest-description">
-                            Aktiv triathlet som trener mot 70.3 Ironman i Jönköping juli 2026. Svømming, sykling og løping har utviklet disiplin, utholdenhet og mental styrke som jeg tar med meg inn i arbeidslivet.
-                        </div>
+            <article class="card">
+                <div class="card-meta">
+                    <div>
+                        <div class="card-role">Resepsjonist</div>
+                        <div class="card-company">Barry's Bootcamp</div>
                     </div>
-                    
-                    <div class="interest-card">
-                        <div class="interest-title">Landeveissykling</div>
-                        <div class="interest-description">
-                            Brennende interesse for landeveissykling og lange turer. Sykling gir både fysisk utfordring og mental ro, samtidig som det bygger målrettethet og gjennomføringskraft.
-                        </div>
-                    </div>
-                    
-                    <div class="interest-card">
-                        <div class="interest-title">Ishockey</div>
-                        <div class="interest-description">
-                            Stor interesse for ishockey som lærer viktigheten av teamarbeid, strategi og raske beslutninger under press – verdifulle egenskaper også i profesjonelle sammenhenger.
-                        </div>
-                    </div>
+                    <span class="card-date">2021 — 2023</span>
                 </div>
-            </section>
+                <div class="card-location">Oslo</div>
+                <p class="card-desc">Booking, innsjekking og betaling i høytempo kundemiljø.</p>
+            </article>
+        </div>
 
-            <section id="languages" class="tab-content">
-                <h2 class="section-title">Språk</h2>
-                
-                <div class="languages-grid">
-                    <div class="language-card">
-                        <div class="language-name">Norsk</div>
-                        <div class="language-level">Morsmål</div>
-                    </div>
-                    <div class="language-card">
-                        <div class="language-name">Engelsk</div>
-                        <div class="language-level">Meget god profesjonell kompetanse</div>
-                    </div>
+        <div class="extra-exp">
+            <strong>Også:</strong> Renovasjonsarbeider (2025) · Barnehagelærer (2024) · Flyttemedarbeider (2022–2023)
+        </div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Utdanning</p>
+        <h2 class="section-title">Grunnlaget.</h2>
+
+        <div class="edu-card">
+            <div class="edu-degree">Bachelor i Business Administration</div>
+            <div class="edu-school">BI Norwegian Business School, Trondheim</div>
+            <div class="edu-date">2024 — 2027 (forventet) · 90 ECTS fullført</div>
+
+            <div class="edu-tags">
+                <span class="edu-tag">Økonomi</span>
+                <span class="edu-tag">Finance</span>
+                <span class="edu-tag">Statistikk</span>
+                <span class="edu-tag">Strategi</span>
+                <span class="edu-tag">Regnskap</span>
+                <span class="edu-tag">Performance Management</span>
+                <span class="edu-tag">Innovasjon</span>
+            </div>
+
+            <div class="grades-header">
+                <div class="grades-title">Karakterer</div>
+                <div class="grades-avg">
+                    <span class="grades-avg-label">Snitt</span>
+                    <span class="grades-avg-value">B</span>
                 </div>
-            </section>
-        </main>
-    </div>
+            </div>
+
+            <table class="grades-table">
+                <tr><td colspan="3" class="semester-label">Høst 2025</td></tr>
+                <tr>
+                    <td>Economics II</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">SØK 3500</td>
+                    <td><span class="grade-badge grade-A">A</span></td>
+                </tr>
+                <tr>
+                    <td>Research Methods & Data Analysis</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">MET 3590</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+                <tr>
+                    <td>Financial Strategy</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">BØK 3632</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+                <tr>
+                    <td>Financial Accounting & Statement Analysis</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">BØK 3532</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+
+                <tr><td colspan="3" class="semester-label">Vår 2025</td></tr>
+                <tr>
+                    <td>Statistics</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">MET 2920</td>
+                    <td><span class="grade-badge grade-A">A</span></td>
+                </tr>
+                <tr>
+                    <td>Finance</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">BØK 3423</td>
+                    <td><span class="grade-badge grade-A">A</span></td>
+                </tr>
+                <tr>
+                    <td>Mathematics</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">MET 2910</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+                <tr>
+                    <td>Business Law</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">JUR 3420</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+
+                <tr><td colspan="3" class="semester-label">Høst 2024</td></tr>
+                <tr>
+                    <td>Fundamentals of Accounting and Finance</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">BØK 3430</td>
+                    <td><span class="grade-badge grade-A">A</span></td>
+                </tr>
+                <tr>
+                    <td>Economics I</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">SØK 3420</td>
+                    <td><span class="grade-badge grade-B">B</span></td>
+                </tr>
+                <tr>
+                    <td>Business Communication</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">EXC 3401</td>
+                    <td><span class="grade-badge grade-C">C</span></td>
+                </tr>
+                <tr>
+                    <td>Organisational Behavior and Leadership</td>
+                    <td style="color: var(--text-secondary); font-size: 13px;">ORG 3403</td>
+                    <td><span class="grade-badge grade-C">C</span></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Kompetanse</p>
+        <h2 class="section-title">Det jeg kan.</h2>
+        <div class="skills-grid">
+            <div class="skill-card" style="--glow: var(--blue);">
+                <span class="skill-icon">&#128202;</span>
+                <div class="skill-name">Excel & data</div>
+                <p class="skill-desc">Formler, automatisering, rapportering. Aktivt brukt i jobb og studier.</p>
+            </div>
+            <div class="skill-card" style="--glow: var(--purple);">
+                <span class="skill-icon">&#128187;</span>
+                <div class="skill-name">Webutvikling</div>
+                <p class="skill-desc">React, Vite, Vercel. Bygget vitalernaering.no med SEO, WCAG og CI/CD.</p>
+            </div>
+            <div class="skill-card" style="--glow: var(--cyan);">
+                <span class="skill-icon">&#9881;&#65039;</span>
+                <div class="skill-name">Systemer</div>
+                <p class="skill-desc">24SevenOffice, ordrebehandling, fakturering. Lærer raskt nye plattformer.</p>
+            </div>
+            <div class="skill-card" style="--glow: var(--green);">
+                <span class="skill-icon">&#9989;</span>
+                <div class="skill-name">Struktur & disiplin</div>
+                <p class="skill-desc">Prioritering, frister, rutiner. Drillet gjennom Forsvaret.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Språk & sertifiseringer</p>
+        <h2 class="section-title">Kvalifikasjoner.</h2>
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--purple);">Norsk</div>
+                <div class="stat-label">Morsmål</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--blue);">Engelsk</div>
+                <div class="stat-label">Flytende</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--cyan);">B</div>
+                <div class="stat-label">Førerkort</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--green);">FR</div>
+                <div class="stat-label">First Responder</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: var(--amber);">&#127894;</div>
+                <div class="stat-label">Vernedyktighetsmedalje</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="section">
+        <p class="section-label">Interesser</p>
+        <h2 class="section-title">Utenfor jobb.</h2>
+        <div class="interests-row">
+            <div class="interest-card">
+                <span class="interest-icon">&#127946;</span>
+                <div class="interest-name">Triathlon</div>
+                <p class="interest-desc">Trener mot Ironman 70.3 Jönköping juli 2026. Svømming, sykkel og løp.</p>
+            </div>
+            <div class="interest-card">
+                <span class="interest-icon">&#128692;</span>
+                <div class="interest-name">Landeveissykling</div>
+                <p class="interest-desc">Bymarka daglig. Utveksling til Montpellier høst 2026.</p>
+            </div>
+            <div class="interest-card">
+                <span class="interest-icon">&#127954;</span>
+                <div class="interest-name">Ishockey</div>
+                <p class="interest-desc">Teamarbeid, strategi og raske beslutninger.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+    <section class="contact-section">
+        <h2 class="contact-title">La oss snakke.</h2>
+        <p class="contact-sub">Alltid åpen for nye muligheter og samtaler.</p>
+        <div class="contact-links">
+            <a href="mailto:kristoffer.brunner.lie@gmail.com" class="contact-link">kristoffer.brunner.lie@gmail.com</a>
+            <a href="tel:+4790713933" class="contact-link">+47 907 13 933</a>
+            <a href="https://www.linkedin.com/in/kristoffer-brunner-lie-5a5676301/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+        </div>
+    </section>
 
     <script>
-        function showTab(tabName) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.section').forEach(s => obs.observe(s));
 
-            const tabButtons = document.querySelectorAll('.tab-button');
-            tabButtons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            setTimeout(() => {
-                document.getElementById(tabName).classList.add('active');
-            }, 50);
-
-            event.target.classList.add('active');
-
-            const tabs = document.querySelector('.tabs');
-            const tabsTop = tabs.getBoundingClientRect().top + window.pageYOffset;
-            
-            window.scrollTo({
-                top: tabsTop - 20,
-                behavior: 'smooth'
-            });
-        }
+        window.addEventListener('scroll', () => {
+            const h = document.querySelector('.scroll-hint');
+            if (h) h.style.opacity = Math.max(0, 1 - window.scrollY / 300);
+        }, { passive: true });
     </script>
 </body>
 </html>
